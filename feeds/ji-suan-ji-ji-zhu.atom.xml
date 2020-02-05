@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom"><title>潘晓亮博客 - 计算机技术</title><link href="https://pxl1981.github.io/" rel="alternate"></link><link href="https://pxl1981.github.io/feeds/ji-suan-ji-ji-zhu.atom.xml" rel="self"></link><id>https://pxl1981.github.io/</id><updated>2020-01-04T00:00:00+08:00</updated><entry><title>用GitHub Pages和Pelican建站</title><link href="https://pxl1981.github.io/posts/creating-a-website-with-github-pages-and-pelican.html" rel="alternate"></link><published>2019-07-09T00:00:00+08:00</published><updated>2020-01-04T00:00:00+08:00</updated><author><name>潘晓亮</name></author><id>tag:pxl1981.github.io,2019-07-09:/posts/creating-a-website-with-github-pages-and-pelican.html</id><summary type="html"></summary><content type="html">&lt;p&gt;作为一个喜欢偶尔写写文章的计算机技术爱好者，用 &lt;a class="reference external" href="https://pages.github.com"&gt;GitHub Pages&lt;/a&gt; 和 &lt;a class="reference external" href="https://getpelican.com"&gt;Pelican&lt;/a&gt; 建站发表文章是我最喜欢的一种方式。今天我就把这种方式介绍给你，下面我来简单的讲解下如何用GitHub Pages和Pelican建站。&lt;/p&gt;
+&lt;p&gt;用GitHub Pages和Pelican建站需要具备使用 &lt;a class="reference external" href="https://github.com"&gt;GitHub&lt;/a&gt; 和搭建 &lt;a class="reference external" href="https://virtualenv.pypa.io"&gt;Python虚拟环境&lt;/a&gt; 的相关知识。如果你还不熟悉这些知识，那么需要你先学习一下 &lt;a class="reference external" href="https://git-scm.com/book/zh"&gt;Pro Git&lt;/a&gt; 和 &lt;a class="reference external" href="https://tutorial.djangogirls.org/zh/"&gt;Django Girls教程&lt;/a&gt; 。&lt;/p&gt;
+&lt;p&gt;下面是用GitHub Pages和Pelican建站的操作步骤：&lt;/p&gt;
+&lt;ol class="arabic"&gt;
+&lt;li&gt;&lt;p class="first"&gt;注册一个GitHub账号，然后在GtiHub上创建两个代码仓库，一个用于托管Pelican部署后的源文件 &lt;tt class="docutils literal"&gt;PELICAN_SOURCE_REPOSITORY&lt;/tt&gt; ，一个用于托管Pelican生成的网页文件 &lt;tt class="docutils literal"&gt;PELICAN_OUTPUT_REPOSITORY&lt;/tt&gt; （这个代码仓库的名称需要创建成 &lt;tt class="docutils literal"&gt;YOUR_USERNAME.github.io&lt;/tt&gt; 这样的形式）。在创建代码仓库时需要选择用于 &lt;a class="reference external" href="https://www.python.org"&gt;Python&lt;/a&gt; 的 &lt;tt class="docutils literal"&gt;.gitignore&lt;/tt&gt; ，并且选择一个 &lt;a class="reference external" href="https://www.gnu.org/licenses/license-list.html"&gt;自由软件许可证&lt;/a&gt; 。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p class="first"&gt;开启 &lt;tt class="docutils literal"&gt;PELICAN_OUTPUT_REPOSITORY&lt;/tt&gt; 的GitHub Pages选项并勾选 &lt;tt class="docutils literal"&gt;Enforce HTTPS&lt;/tt&gt; 。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p class="first"&gt;安装最新版本的 &lt;a class="reference external" href="https://git-scm.com"&gt;Git&lt;/a&gt; 、&lt;a class="reference external" href="https://www.python.org"&gt;Python&lt;/a&gt; 和 &lt;a class="reference external" href="https://virtualenv.pypa.io"&gt;Virtualenv&lt;/a&gt; 。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p class="first"&gt;将 &lt;tt class="docutils literal"&gt;PELICAN_SOURCE_REPOSITORY&lt;/tt&gt; 和 &lt;tt class="docutils literal"&gt;PELICAN_OUTPUT_REPOSITORY&lt;/tt&gt; 克隆到本地，克隆时将 &lt;tt class="docutils literal"&gt;PELICAN_OUTPUT_REPOSITORY&lt;/tt&gt; 放在 &lt;tt class="docutils literal"&gt;PELICAN_SOURCE_REPOSITORY&lt;/tt&gt; 的根目录下。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p class="first"&gt;编辑 &lt;tt class="docutils literal"&gt;PELICAN_SOURCE_REPOSITORY&lt;/tt&gt; 的 &lt;tt class="docutils literal"&gt;.gitignore&lt;/tt&gt; ，在文件的最后一行添加如下代码:&lt;/p&gt;
+&lt;pre class="literal-block"&gt;
+# Pelican output folder
+PELICAN_OUTPUT_REPOSITORY/
+&lt;/pre&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p class="first"&gt;创建Pelican的Python虚拟环境。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p class="first"&gt;在 &lt;tt class="docutils literal"&gt;PELICAN_SOURCE_REPOSITORY&lt;/tt&gt; 的根目录下安装Pelican实例，并将 &lt;tt class="docutils literal"&gt;pelicanconf.py&lt;/tt&gt; 中的 &lt;tt class="docutils literal"&gt;OUTPUT_PATH&lt;/tt&gt; 设置为 &lt;tt class="docutils literal"&gt;PELICAN_OUTPUT_REPOSITORY&lt;/tt&gt; 。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p class="first"&gt;安装Pelican &lt;a class="reference external" href="https://github.com/getpelican/pelican-themes"&gt;主题&lt;/a&gt; 和 &lt;a class="reference external" href="https://github.com/getpelican/pelican-plugins"&gt;插件&lt;/a&gt; 。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p class="first"&gt;在 &lt;tt class="docutils literal"&gt;PELICAN_SOURCE_REPOSITORY&lt;/tt&gt; 的 &lt;tt class="docutils literal"&gt;content&lt;/tt&gt; 目录下创建后缀名为 &lt;tt class="docutils literal"&gt;.rst&lt;/tt&gt; 的纯文本文件，然后用 &lt;a class="reference external" href="http://docutils.sourceforge.net/rst.html"&gt;reStructuredText&lt;/a&gt; 语法撰写文章。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p class="first"&gt;在 &lt;tt class="docutils literal"&gt;PELICAN_SOURCE_REPOSITORY&lt;/tt&gt; 的根目录下使用 &lt;tt class="docutils literal"&gt;pelican&lt;/tt&gt; 命令将文章输出为网页文件存储到 &lt;tt class="docutils literal"&gt;PELICAN_OUTPUT_REPOSITORY&lt;/tt&gt; 。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p class="first"&gt;使用Git命令将 &lt;tt class="docutils literal"&gt;PELICAN_SOURCE_REPOSITORY&lt;/tt&gt; 和 &lt;tt class="docutils literal"&gt;PELICAN_OUTPUT_REPOSITORY&lt;/tt&gt; push到GitHub。&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;以上的操作步骤是给有一定技术基础的人作为参考的说明。如果你看不太明白，建议你阅读这篇 &lt;a class="reference external" href="https://rsip22.github.io/blog/create-a-blog-with-pelican-and-github-pages.html"&gt;Creating a blog with Pelican and GitHub Pages&lt;/a&gt; ，译文叫作 &lt;a class="reference external" href="https://linux.cn/article-9445-1.html"&gt;使用Pelican和GitHub Pages来搭建博客&lt;/a&gt; 。&lt;/p&gt;
+&lt;p&gt;最后推荐一个Pelican主题和一些相关的Pelican插件，这个主题叫作 &lt;a class="reference external" href="https://github.com/Pelican-Elegant/elegant"&gt;Elegant&lt;/a&gt; ，与其相关的Pelican插件有:&lt;/p&gt;
+&lt;pre class="literal-block"&gt;
+sitemap
+extract_toc
+tipue_search
+neighbors
+assets
+&lt;/pre&gt;
+&lt;p&gt;可以在 &lt;a class="reference external" href="https://github.com/getpelican/pelican-plugins"&gt;Pelican插件的GitHub代码仓库&lt;/a&gt; 中获取以上插件。&lt;/p&gt;
+</content><category term="计算机技术"></category><category term="GitHub"></category><category term="GitHub Pages"></category><category term="Pelican"></category><category term="建站"></category></entry></feed>
